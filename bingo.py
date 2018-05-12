@@ -16,43 +16,59 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with Shadowfax. If not, see <http://www.gnu.org/licenses/>.
+#
+# Poorly forked Finnish version for Eurovision Song Contest 2018 
+# by mucla (github.com/mucla).
 ################################################################################
 
 import numpy as np
 
 # list of words that are likely to be mentioned during the presentation
 # mind the manual hyphenation, which is necessary to ensure every word fits
-likely = ["SKIRT", "SED", "UV", "sterren", "FITS", "ar\\-tikel", "EAGLE",
-          "kleur", "band", "FIR", "docto\\-raat", "Maarten Baes", "filmpje",
-          "3D", "stralings\\-overdracht", "data", "tele\\-scoop", "beeld",
-          "Her\\-schel", "welkom", "Monte Carlo", "compu\\-ter", "Voronoi",
-          "PTS", "geometrie", "cel", "octree"]
+likely = ["Tuulikone", "Suomen lippu katsomossa", "Asun\\-vaihdos", 
+        "Pakko laulaa mukana", "Ylireippaat tanssijat", "Laahus tai liehukkeet",
+         "Modulaatio","Wtf-hetki", "Suomi saa 12 pistetta", "Vilkutus kameraan",
+        "Balladi", "Maailman\\-parannus\\-biisi", "Joku ylosalaisin", "Vanhus lavalla",
+        "Siansaksaa lyriikoiden joukossa", "Lento\\-suukko", 
+        "Pisteiden antaja jaa juttelemaan liian pitkaan juontajan kanssa", 
+        "Valtava laahus, jota esiintyja ei pysty (itse) liikuttamaan", 
+        "Laulaja iskee silmaa kameralle", "Mies laulaa sakeistot, nainen laulaa kertsit",
+        "Juontajat vitsailevat ennalta sovitusti ja eparennosti", "Juontajat \"piilo\"\\-mainostaa oheiskraasaa",
+        "Haviaja yrittaa hymyilla reippaasti", 
+        "Joku viime vuosien voittajista nakyy muualla kuin esityksessa",
+        "Juontaja kertoo, etta artisti on itse suunnitellut pukunsa"]
 likely = np.array(likely)
 
 # list of words that are less likely to be mentioned
-unlikely = ["krijt", "42", "Pizza Carlo", "Star Wars", "salsa", "Jo Raes",
-            "comic sans", "artifi\\-ci\\\"{e}le intelli\\-gentie",
-            "vakantie\\-foto"]
+unlikely = ["Tukka totterolla", "Koskettava kohtalo", "Disko\\-humppa", 
+            "Artisti on alle 18-vuotias ja se mainitaan erikseen juonnossa",
+            "Laulajalla on rooliasu, (ammatti, hahmo, tms.)",
+            "Naislaulaja riisuu pitkan mekon tai takin", "Mieslaulaja riisuu takin",
+            "Tanssijat nostavat laulajan ilmaan", 
+            "Laulaja soittaa pari savelta jollain instrumentilla ja sitten hylkaa sen loppubiisin ajaksi",
+            "Laulajan kaula-aukko ulottuu napaan asti"]
 unlikely = np.array(unlikely)
 
 file = open("bingo.tex", "w")
 
-file.write(r"""\documentclass[12pt]{letter}
+file.write(r"""\documentclass[10pt]{letter}
 \usepackage{a4wide}
 \usepackage{tabularx}
+\usepackage{graphicx}
 \begin{document}""")
 
 # the number of iterations sets the number of bingo squares
 # they are put on separate a4 pages
-for i in range(12):
+for i in range(8):
     file.write(r"""
     \thispagestyle{empty}
     \begin{center}
     \Huge{}
     \bf{}
-    {Dr. Bingo}\\[48pt]
+    {Viisubingo 2018}\\[18pt]
     \end{center}
-    \Large
+    
+    \Small
     \begin{tabularx}{\textwidth}{| >{\centering{}\arraybackslash}X | 
     >{\centering{}\arraybackslash}X | >{\centering{}\arraybackslash}X |
     >{\centering{}\arraybackslash}X | >{\centering{}\arraybackslash}X |
@@ -85,7 +101,7 @@ for i in range(12):
         file.write("{word}".format(word = word))
         count += 1
         if count%5 == 0:
-            file.write(" & \\\\[72pt]\\hline\n")
+            file.write(" & \\\\[44pt]\\hline\n")
         else:
             file.write(" & ")
 
